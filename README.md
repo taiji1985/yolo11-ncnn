@@ -24,9 +24,8 @@ I spent an entire day working on this. Various codes available online were of no
 
 If you find this useful, I hope you can give it a Star.
 
----
 
-Please note that the links provided in the original text (for images) may not be accessible here, as they seem to be placeholder or local file paths. If you need to share images or files, consider uploading them to a web-accessible location and providing the direct URL.
+
 
 ## 2. Brief Tutorial on Training the Model
 ### 2.1 Setting Up the Environment (If You Haven't Already)
