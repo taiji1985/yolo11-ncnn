@@ -2,6 +2,8 @@
 
 use ncnn exported from ultralytics yolo11 directly, without change the code of yolo11
 
+直接很简单的使用ultralytics导出的yolo11的ncnn模型，而不需要修改yolo11的代码
+
 [English](README.md) | [中文](README.zh-CN.md)
 
 # 1 缘由

@@ -2,6 +2,8 @@
 
 use ncnn exported from ultralytics yolo11 directly, without change the code of yolo11
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 ## 1. Background
 
 
