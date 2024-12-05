@@ -2,6 +2,8 @@
 
 use ncnn exported from ultralytics yolo11 directly, without change the code of yolo11
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 # 1 缘由
 
 我在尝试将YOLO11模型导出的NCNN模型进行推理，但网上没有合适的代码。目前有的代码有两个
