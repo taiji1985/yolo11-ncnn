@@ -1,0 +1,7 @@
+matplotlib==3.7.5
+ncnn==1.0.20240820
+numpy==1.24.4
+opencv_python==4.10.0.84
+opencv_python_headless==4.9.0.80
+PyYAML==6.0.2
+torch==2.2.2+cpu
