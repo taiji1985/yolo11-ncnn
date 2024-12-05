@@ -4,9 +4,6 @@ use ncnn exported from ultralytics yolo11 directly, without change the code of y
 
 ## 1. Background
 
-Here's the translation into English:
-
----
 
 I am attempting to perform inference with an NCNN model exported from the YOLO11 model, but there is no suitable code available online. Currently, there are two pieces of code available:
 
