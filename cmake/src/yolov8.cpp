@@ -282,7 +282,7 @@ public:
             const int num_labels = class_names.size(); // COCO has detect 80 object labels.
             parse_yolov8_detections(
                 (float*)out.data, prob_threshold,
-                out.h, out.w, num_labels,
+                out.h, out.w, out.h - 4,
                 in_pad.w, in_pad.h,
                 objects32);
             proposals.insert(proposals.end(), objects32.begin(), objects32.end());
@@ -397,6 +397,7 @@ int mainYolov8(int argc, char** argv)
     //    fprintf(stderr, "Usage: %s [imagepath]\n", argv[0]);
     //    return -1;
     //}
+    std::cout <<"Usage: [imagepath] [modelpath] [classes_names_split_by_comma]"<<std::endl;
 
     std::string model_path = argc > 2 ? argv[2] : "..\\yolo11n_ncnn_model\\model.ncnn";
     std::string image_path = argc > 1 ? argv[1] : "..\\bus.jpg";
@@ -410,7 +411,18 @@ int mainYolov8(int argc, char** argv)
         fprintf(stderr, "cv::imread %s failed\n", image_path);
         return -1;
     }
-    YoloV8 v8(model_path, {
+    // YoloV8 v8(model_path, {
+    //         "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
+    //         "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
+    //         "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
+    //         "skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",
+    //         "tennis racket", "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple",
+    //         "sandwich", "orange", "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch",
+    //         "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
+    //         "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
+    //         "hair drier", "toothbrush"
+    //     }, false);
+    std::vector<std::string> class_names = {
             "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
             "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
             "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
@@ -420,8 +432,25 @@ int mainYolov8(int argc, char** argv)
             "potted plant", "bed", "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
             "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
             "hair drier", "toothbrush"
-        }, false);
-
+    };
+    if (argc > 3){
+        std::cout<<"parse classes"<<std::endl;
+        char* classes = argv[3];
+        class_names.clear();
+        //根据逗号分隔
+        std::string str(classes);
+        std::stringstream ss(str);
+        std::string item;
+        while (std::getline(ss, item, ',')) {
+            class_names.push_back(item);
+        }
+        //打印
+        std::cout<<"use classes"<<std::endl;
+        for (const auto& name : class_names) {
+            std::cout << name << std::endl;
+        }
+    }
+    YoloV8 v8(model_path, class_names, false);
     std::vector<Object> objects;
     v8.detect_yolov8(m, objects, model_path);
 
